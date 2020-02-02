@@ -6,14 +6,29 @@ pipeline {
         CI = 'true'
     }
     stages {
+        stage('Lint') {
+            steps {
+                sh 'npm install'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
             }
         }
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
+        stage('Test and Audit') {
+            failFast true
+            parallel {
+              stage('Test') {
+                steps {
+                    sh './jenkins/scripts/test.sh'
+                }
+              }
+              stage('Audit') {
+                steps {
+                    sh 'npm audit'
+                }
+              }
             }
         }
         stage('Deliver') {
