@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        'build_host'
+        label = 'build_host'
     }
     environment {
         CI = 'true'
