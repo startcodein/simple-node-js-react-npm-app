@@ -34,10 +34,6 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-            }
-        }
-        stage('Validate') {
-            steps {
                 sh './jenkins/scripts/validate.sh'
                 input message: 'Kill the process ? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
