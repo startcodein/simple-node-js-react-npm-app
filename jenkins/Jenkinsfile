@@ -34,7 +34,12 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+            }
+        }
+        stage('Validate') {
+            steps {
+                sh './jenkins/scripts/validate.sh'
+                input message: 'Kill the process ? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
         }
