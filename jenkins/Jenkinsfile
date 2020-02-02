@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Lint') {
             steps {
-                sh 'echo "install"'
+                sh 'npx eslint'
             }
         }
         stage('Build') {
@@ -26,7 +26,7 @@ pipeline {
               }
               stage('Audit') {
                 steps {
-                    sh 'npm audit'
+                    sh 'npm audit --dry-run'
                 }
               }
             }
