@@ -32,6 +32,10 @@ pipeline {
               }
             }
         }
+        stage('CodeAnalysis') {
+            steps {
+                sh 'cd ${PWD}/src; /opt/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
+            }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
