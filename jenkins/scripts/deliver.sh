@@ -29,6 +29,7 @@ echo 'Visit http://localhost:3000 to see your Node.js/React application in actio
 echo '(This is why you specified the "args ''-p 3000:3000''" parameter when you'
 echo 'created your initial Pipeline as a Jenkinsfile.)'
 
-zip -r build-{$GIT_COMMIT}.zip  build
-echo "Delivering release build-{$GIT_COMMIT}.zip to artifactory.."
-curl -n -X PUT "http://artifactory.piraiinfo.co.uk/artifactory/releases" -T build-{$GIT_COMMIT}.zip 
+zip -r build-$GIT_COMMIT.zip  build
+ls -l
+echo "Delivering release build-$GIT_COMMIT.zip to artifactory.."
+curl -n -X PUT "http://artifactory.piraiinfo.co.uk/artifactory/releases/build-$GIT_COMMIT.zip " -T build-$GIT_COMMIT.zip 
