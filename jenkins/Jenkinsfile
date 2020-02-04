@@ -37,11 +37,10 @@ pipeline {
                 sh 'cd ${PWD}/src; /opt/cicd/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
             }
           }
-        stage('Deliver and Validate') {
+        stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                input message: 'Kill the process ? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sh 'sleep 3; ./jenkins/scripts/kill.sh'
             }
         }
     }
