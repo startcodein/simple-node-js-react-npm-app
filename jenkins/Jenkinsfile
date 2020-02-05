@@ -7,7 +7,7 @@ pipeline {
         DOTNET_RUNNING_IN_CONTAINER = 'true'
     }
     stages {
-        stage('Lint') {
+        stage('Code Sanity Check') {
             steps {
                 sh './jenkins/scripts/lint.sh'
             }
@@ -20,24 +20,24 @@ pipeline {
         stage('Test and Audit') {
             failFast true
             parallel {
-              stage('Test') {
+              stage('Functional Testing') {
                 steps {
                     sh './jenkins/scripts/test.sh'
                 }
               }
-              stage('Audit') {
+              stage('Compliance Testing') {
                 steps {
                     sh './jenkins/scripts/audit.sh'
                 }
               }
             }
         }
-        stage('CodeAnalysis') {
+        stage('Security Analysis') {
             steps {
                 sh 'cd ${PWD}/src; /opt/cicd/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
             }
           }
-        stage('Deliver') {
+        stage('Deployment') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
                 sh 'sleep 3; ./jenkins/scripts/kill.sh'
