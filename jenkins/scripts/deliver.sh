@@ -32,4 +32,4 @@ echo 'created your initial Pipeline as a Jenkinsfile.)'
 zip -r build-$GIT_COMMIT.zip  build
 ls -l
 echo "Delivering release build-$GIT_COMMIT.zip to artifactory.."
-curl -n -X PUT "http://artifactory.piraiinfo.co.uk/artifactory/releases/build-$GIT_COMMIT.zip " -T build-$GIT_COMMIT.zip 
+curl -n -X PUT "http://artifactory.piraiinfo.co.uk:81/artifactory/releases/build-$GIT_COMMIT.zip " -T build-$GIT_COMMIT.zip 
