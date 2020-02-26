@@ -32,4 +32,9 @@ echo 'created your initial Pipeline as a Jenkinsfile.)'
 zip -r build-$GIT_COMMIT.zip  build
 ls -l
 echo "Delivering release build-$GIT_COMMIT.zip to artifactory.."
-curl -n -X PUT "http://51.158.78.1:81/artifactory/releases/build-$GIT_COMMIT.zip " -T build-$GIT_COMMIT.zip 
+if [ -z $ARTHOST ] ; then
+ARTHOST = "51.158.78.1"
+fi
+
+#configure .netrc in the build_host for login.
+curl -n -X PUT "http://$ARTHOST:81/artifactory/releases/build-$GIT_COMMIT.zip " -T build-$GIT_COMMIT.zip 
