@@ -33,7 +33,7 @@ zip -r build-$GIT_COMMIT.zip  build
 ls -l
 echo "Delivering release build-$GIT_COMMIT.zip to artifactory.."
 if [ -z $ARTHOST ] ; then
-ARTHOST = "51.158.78.1"
+  ARTHOST="51.158.78.1"
 fi
 
 #configure .netrc in the build_host for login.
